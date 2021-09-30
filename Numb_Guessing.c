@@ -1,6 +1,11 @@
 /*
 NUMBER GUESSING GAME
 A program that allows a user to guess a number between 1-10
+Outline:
+- displayMenu() - This one outputs the menu of the guessing game
+- inputValid() - This one make sures that the user is entering the correct input. It returns a character
+that is associated with the input.
+- option_1() and option_1D
 */
 
 #include <stdio.h>
@@ -13,7 +18,7 @@ const char STOP = 'S';  /// a character used to stop the game and go back to the
 const char CONTINUE = 'C'; /// a character used to continue the game if the input is invalid or the guess input is incorrect.
 const char TERMINATE = 'T'; /// Terminates a program once done playing the game
 
-void clear_bufferinput(){
+void clear_bufferinput(){ /// This function clears all of the buffer in the input
     while(getchar() != '\n');
 }
 ///Displays the menu
@@ -87,8 +92,9 @@ int max_input(){
         fflush(stdout);
         scanf("%d", &value);
     }
+    return value;
 }
-void Game(){
+void Game(int *max_val){
     srand(time(NULL));
     int n;
     char end_program;
@@ -97,20 +103,20 @@ void Game(){
         
         switch(inputValid()){
             case '1' : {
-                n = rand() % DEFAULT_VALUE + 1;
+                n = rand() % (*max_val) + 1;
                 char t;
                 do{
-                    t = option_1D(n);
+                    t = option_1(*max_val,n);
                 }while(t == CONTINUE);
                 end_program = CONTINUE;
                 break;
              }
             case '2': {
                 char t;
-                int max = max_input();
-                n = rand() % max + 1;
+                *max_val = max_input();
+                n = rand() % *max_val + 1;
                 do{
-                    t = option_1(max,n);
+                    t = option_1(*max_val,n);
                 }while(t == CONTINUE);
                 end_program = CONTINUE;
                 break;
@@ -130,7 +136,7 @@ void Game(){
 
 
 int main(){
-    
-    Game();
+    int maximum_val = DEFAULT_VALUE;
+    Game(&maximum_val);
     return 0;
 }
