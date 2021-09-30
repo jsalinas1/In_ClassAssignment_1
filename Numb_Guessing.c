@@ -9,6 +9,9 @@ A program that allows a user to guess a number between 1-10
 #include <limits.h>
 
 const int DEFAULT_VALUE = 10;
+const char STOP = 'S';  /// a character used to stop the game and go back to the menu
+const char CONTINUE = 'C'; /// a character used to continue the game if the input is invalid or the guess input is incorrect.
+
 ///Displays the menu
 void displayMenu(){
     printf("Press 1 to play a game");
@@ -29,21 +32,46 @@ char inputValid(){
     return d;
 }
 
-void option_1(int max_value){
+char option_1(int max_value, int rand_num){
+    
     int guess_n;
     char valid;
     printf("Enter a number(1 - %d): ", max_value);
     fflush(stdout);
-    scanf("%d", &guess_n);
-    printf("%c\n",getchar());
+    valid = scanf("%d", guess_n) ? 'Y' : 'N';
+    if(valid == 'N'){
+        char c = getchar();
+        if(c == 'q' || c == 'Q')
+            return STOP;
+        printf("Invalid input");
+        return CONTINUE;
+    }
+    else{
+        if(guess_n == rand_num){
+            printf("Congratulation! You have guessed %d right!", guess_n);
+            return STOP;
+        }
+        else if(guess_n > rand_num)
+            printf("Number too high. Try again.");
+        else 
+            printf("Number too low. Try again.");
+        
+        return CONTINUE;
+
+    }
 }
 
-void option_1D(){
-    option_1(DEFAULT_VALUE);
+char option_1D(int rand_num){
+    return option_1(DEFAULT_VALUE, rand_num);
 }
 
+void Game(){
+    srand(time(NULL));
+    int n = rand() % DEFAULT_VALUE + 1;
+    option_1D(n);
+}
 
 int main(){
-    option_1D();
+    Game();
     return 0;
 }
