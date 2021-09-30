@@ -36,7 +36,7 @@ char inputValid(){
     return d;
 }
 
-char option_1(int max_value, int rand_num){
+char option_1(int max_value, int rand_num){ ///Option 1 with customized max_value
     
     int guess_n;
     char valid;
@@ -65,16 +65,29 @@ char option_1(int max_value, int rand_num){
     }
 }
 
-char option_1D(int rand_num){
+
+
+char option_1D(int rand_num){  ///Default value to option 1
     return option_1(DEFAULT_VALUE, rand_num);
 }
-
+int max_input(){
+    int value;
+    printf("Enter the maximum value greater than 1: ");
+    fflush(stdout);
+    scanf("%d", &value);
+    while(value < 1){
+        printf("Invalid. Enter the maximum value greater than 1: ");
+        fflush(stdout);
+        scanf("%d", &value);
+    }
+}
 void Game(){
     srand(time(NULL));
     int n;
     char end_program;
     do{
         displayMenu();
+        
         switch(inputValid()){
             case '1' : {
                 n = rand() % DEFAULT_VALUE + 1;
@@ -86,6 +99,13 @@ void Game(){
                 break;
              }
             case '2': {
+                char t;
+                int max = max_input();
+                n = rand() % max + 1;
+                do{
+                    t = option_1(max,n);
+                }while(t == CONTINUE);
+                end_program = CONTINUE;
                 break;
             }
             case '3' : {
