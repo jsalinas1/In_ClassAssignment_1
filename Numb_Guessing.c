@@ -84,6 +84,7 @@ char option_1D(int rand_num){  ///Default value to option 1
 }
 int max_input(){
     int value;
+    FILE *fp;
     printf("Enter the maximum value greater than 1: ");
     fflush(stdout);
     scanf("%d", &value);
@@ -92,6 +93,10 @@ int max_input(){
         fflush(stdout);
         scanf("%d", &value);
     }
+    fp = fopen("max_number.txt", "w+");
+    fprintf(fp, "%d", value);
+    fclose(fp);
+    printf("\n\n");
     return value;
 }
 void Game(int *max_val){
@@ -128,10 +133,21 @@ void Game(int *max_val){
 
 }
 
+int file_Check(){
+    int save = 3;
+    FILE *fp;
+    if(fp = fopen("max_number.txt", "r")){
+        fscanf(fp, "%d", &save);
+        fclose(fp);
+        return save;
+    }
+    return DEFAULT_VALUE;
+    
+}
 
 
 int main(){
-    int maximum_val = DEFAULT_VALUE;
+    int maximum_val = file_Check(); /// Sets a value for maximum if it's saved in file
     Game(&maximum_val);
     return 0;
 }
