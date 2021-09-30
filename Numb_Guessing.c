@@ -21,7 +21,7 @@ void displayMenu(){
     printf("Press 1 to play a game\n");
     printf("Press 2 to change the max number\n");
     printf("Press 3 to quit\n");
-    printf("********************************");
+    printf("***********************************\n");
 }
 
 //Checks for input. Returns an appropriate input
@@ -46,8 +46,10 @@ char option_1(int max_value, int rand_num){ ///Option 1 with customized max_valu
     valid = scanf("%d", &guess_n) ? 'Y' : 'N';
     if(valid == 'N'){
         char c = getchar();
-        if(c == 'q' || c == 'Q')
+        if(c == 'q' || c == 'Q'){
+            printf("\n\n");
             return STOP;
+        }
         printf("Invalid input\n");
         return CONTINUE;
     }
