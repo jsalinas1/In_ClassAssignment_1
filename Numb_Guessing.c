@@ -64,7 +64,7 @@ char option_1(int max_value, int rand_num){ ///Option 1 with customized max_valu
             printf("\n\n");
             return STOP;
         }
-        printf("Invalid input\n");
+        printf("Invalid input. Try Again.\n");
         return CONTINUE;
     }
     else{
