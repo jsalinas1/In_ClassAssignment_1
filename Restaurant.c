@@ -3,12 +3,19 @@ RESTURAUNT BILL
 A program that computes the tax and tip on a restaurant bill for a patron
 Output: Displays the meal cost, tax amount, tip amount, and total bill
 Input: Tax and Tip in percentages and the chosen meal
+- display_menu() - Displays the menus
+- display_total() - Displays a total
+- random_input() - returns a random input
+- inputTax() - An input for tax. Let the user know to enter again if the values are negative
+- inputTip() - An input for tip. Let the user know to enter again if the values are negative
+- getTotal() - returns a calculated total of the bill
+
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-enum Meal{Salad, Soup, Sandwich, Pizza};
+enum Meal{Salad, Soup, Sandwich, Pizza}; /// A set of meals
 const float mealCost[] = {9.95, 4.55, 13.25, 22.35}; // Created an array of mealCost
 
 //Displays the menu
