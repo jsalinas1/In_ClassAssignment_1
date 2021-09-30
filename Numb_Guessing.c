@@ -112,12 +112,7 @@ void Game(int *max_val){
                 break;
              }
             case '2': {
-                char t;
                 *max_val = max_input();
-                n = rand() % *max_val + 1;
-                do{
-                    t = option_1(*max_val,n);
-                }while(t == CONTINUE);
                 end_program = CONTINUE;
                 break;
             }
