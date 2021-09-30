@@ -6,8 +6,7 @@ Input: Tax and Tip in percentages and the chosen meal
 */
 
 #include <stdio.h>
-enum Meal{Salad, Soup, Sandwich, Pizza}; // Enumrated a set of meals
-
+enum Meal{Salad, Soup, Sandwich, Pizza};
 const float mealCost[] = {9.95, 4.55, 13.25, 22.35}; // Created an array of mealCost
 
 //Displays the menu
@@ -17,23 +16,28 @@ void display_menu(){
 }
 
 // Displays the bill
-void display_total(){
+void display_total(float tax, float tip, float meal_Cost, float total){
+    printf("\n**************BILL*************\n");
+    printf("Cost: $%2.2f\n", meal_Cost);
+    printf("Tax: $%2.2f\n", meal_Cost*(tax/100));
+    printf("Tip: $%2.2f\n", meal_Cost*(tip/100));
+    printf("Total: $%2.2f\n", total);
 
 }
 
 //Input validation for choosing a meal. Returns the value of the meal
-float inputmeal_Valid(enum Meal *my_meal){
+float inputmeal_Valid(){
     int i;
     printf("Enter the meal to get(1 - 4): ");
     fflush(stdout);
     scanf("%d", &i);
-    while(i < Salad + 1 || i > Pizza + 1){
+    while(i < 1 || i > 4){
         printf("Invalid input: Enter the meal to get(1 - 4): ");
         fflush(stdout);
         scanf("%d", &i);
     }
-    *my_meal = i - 1;
-    return mealCost[*my_meal];
+
+    return mealCost[i-1];
 }
 
 //Input validation for tax input. Returns value of that tax
@@ -64,14 +68,19 @@ float inputTip(){
     return tip;
 }
 
+/// Calculates the total
+float getTotal(float tax, float tip, float meal_Cost){
+    return meal_Cost + (tax/100)*meal_Cost + (tip/100)*meal_Cost;
+}
+
 int main(){
     display_menu();
-    enum Meal my_meal;
-    float meal_Cost = inputmeal_Valid(&my_meal);
+    float meal_Cost = inputmeal_Valid();
     float tax = inputTax();
     float tip = inputTip();
+    float total = getTotal(tax, tip, meal_Cost);
+    display_total(tax, tip, meal_Cost, total);
 
 
-    printf("%.2f\n%.2f\n%.2f", meal_Cost, tax, tip);
     return 0;
 }
