@@ -5,7 +5,15 @@ Outline:
 - displayMenu() - This one outputs the menu of the guessing game
 - inputValid() - This one make sures that the user is entering the correct input. It returns a character
 that is associated with the input.
-- option_1() and option_1D
+- option_1() - Lets the user choose the random number. If q is entered, the program goes back to the menu. 
+It also checks and let the user know about invalid input including negative input, incorrect guessed number,
+and also an overbound guessed input.
+- Game() - Takes care the input choices using switch statements. This is where n number is randomized and passed to
+option_1(). This function also accepts the pointer parameter of the max_value just in case it is changed.
+- max_input() - This is for option 2. This changes the maximum input and it saved that value in the file called
+"max_number.txt" If the file already exist, it deletes that file, create a new one where the value will be saved.
+This also make sure the user does not enter a negative value or an overbound value.
+- file_check() - returns a max_value from the file. If the file doesn't exist, then return the default_value
 */
 
 #include <stdio.h>
@@ -34,6 +42,7 @@ char inputValid(){
     char d;
     fflush(stdout);
     scanf("%c", &d);
+
     while(!(d == '1' || d == '2' || d == '3')){
         printf("Input invalid. Try again..\n");
         fflush(stdout);
@@ -79,16 +88,14 @@ char option_1(int max_value, int rand_num){ ///Option 1 with customized max_valu
 
 
 
-char option_1D(int rand_num){  ///Default value to option 1
-    return option_1(DEFAULT_VALUE, rand_num);
-}
+
 int max_input(){
     int value;
     FILE *fp;
     printf("Enter the maximum value greater than 1: ");
     fflush(stdout);
     scanf("%d", &value);
-    while(value < 1){
+    while(value < 1 || value > INT_MAX){
         printf("Invalid. Enter the maximum value greater than 1: ");
         fflush(stdout);
         scanf("%d", &value);
