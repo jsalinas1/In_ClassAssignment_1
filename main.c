@@ -80,7 +80,5 @@ int main(){
     float tip = inputTip();
     float total = getTotal(tax, tip, meal_Cost);
     display_total(tax, tip, meal_Cost, total);
-
-
     return 0;
 }
