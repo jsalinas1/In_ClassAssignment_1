@@ -21,7 +21,7 @@ void display_total(){
 
 }
 
-//
+//Input validation for choosing a meal. Returns the value of the meal
 float inputmeal_Valid(enum Meal *my_meal){
     int i;
     printf("Enter the meal to get(1 - 4): ");
@@ -36,6 +36,7 @@ float inputmeal_Valid(enum Meal *my_meal){
     return mealCost[*my_meal];
 }
 
+//Input validation for tax input. Returns value of that tax
 float inputTax(){
     float tax;
     printf("Enter Tax Percent: ");
@@ -49,6 +50,7 @@ float inputTax(){
     return tax;
 }
 
+//Input validation for tip input. Returns value of that tip
 float inputTip(){
     float tip;
     printf("Enter Tip Percent: ");
