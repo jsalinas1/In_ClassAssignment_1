@@ -74,6 +74,8 @@ char option_1(int max_value, int rand_num){ ///Option 1 with customized max_valu
         }
         else if(guess_n > max_value)
                 printf("Number entered is way too high! Must be between 1 and %d. Try again.\n", max_value);
+        else if(guess_n < 1)
+                printf("Invalid input! Must be between 1 and %d. Try again.\n", max_value);
         else if(guess_n > rand_num)
             printf("Number too high. Try again.\n");
         
