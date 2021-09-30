@@ -103,7 +103,7 @@ int max_input(){
         scanf("%d", &value);
     }
     fp = fopen("max_number.txt", "w+");
-    fprintf(fp, "%d", value);
+    fprintf(fp, "%d", &value);
     fclose(fp);
     printf("\n\n");
     return value;
@@ -143,7 +143,7 @@ void Game(int *max_val){
 }
 
 int file_Check(){
-    int save = 3;
+    int save;
     FILE *fp;
     if(fp = fopen("max_number.txt", "r")){
         fscanf(fp, "%d", &save);
