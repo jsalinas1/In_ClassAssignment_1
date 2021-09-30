@@ -29,7 +29,6 @@ void display_total(float tax, float tip, float meal_Cost, float total){
 
 //Input validation for choosing a meal. Returns the value of the meal
 float random_input(){
-    int i, n;
     srand(time(NULL));
     return mealCost[rand() % 4];
 }
