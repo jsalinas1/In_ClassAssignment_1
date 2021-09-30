@@ -6,6 +6,8 @@ Input: Tax and Tip in percentages and the chosen meal
 */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 enum Meal{Salad, Soup, Sandwich, Pizza};
 const float mealCost[] = {9.95, 4.55, 13.25, 22.35}; // Created an array of mealCost
 
@@ -26,18 +28,10 @@ void display_total(float tax, float tip, float meal_Cost, float total){
 }
 
 //Input validation for choosing a meal. Returns the value of the meal
-float inputmeal_Valid(){
-    int i;
-    printf("Enter the meal to get(1 - 4): ");
-    fflush(stdout);
-    scanf("%d", &i);
-    while(i < 1 || i > 4){
-        printf("Invalid input: Enter the meal to get(1 - 4): ");
-        fflush(stdout);
-        scanf("%d", &i);
-    }
-
-    return mealCost[i-1];
+float random_input(){
+    int i, n;
+    srand(time(NULL));
+    return mealCost[rand() % 4];
 }
 
 //Input validation for tax input. Returns value of that tax
@@ -75,10 +69,11 @@ float getTotal(float tax, float tip, float meal_Cost){
 
 int main(){
     display_menu();
-    float meal_Cost = inputmeal_Valid();
+    float meal_Cost = random_input();
     float tax = inputTax();
     float tip = inputTip();
     float total = getTotal(tax, tip, meal_Cost);
     display_total(tax, tip, meal_Cost, total);
+    
     return 0;
 }
