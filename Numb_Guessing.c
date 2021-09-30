@@ -21,6 +21,7 @@ void displayMenu(){
     printf("Press 1 to play a game\n");
     printf("Press 2 to change the max number\n");
     printf("Press 3 to quit\n");
+    printf("********************************");
 }
 
 //Checks for input. Returns an appropriate input
@@ -55,10 +56,14 @@ char option_1(int max_value, int rand_num){ ///Option 1 with customized max_valu
             printf("Congratulation! You have guessed %d right!\n\n", guess_n);
             return STOP;
         }
+        else if(guess_n > max_value)
+                printf("Number entered is way too high! Must be between 1 and %d. Try again.\n", max_value);
         else if(guess_n > rand_num)
             printf("Number too high. Try again.\n");
-        else 
+        
+        else
             printf("Number too low. Try again.\n");
+        
         
         return CONTINUE;
 
